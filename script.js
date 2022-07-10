@@ -1,11 +1,9 @@
-
 let body = document.getElementById('body');
 let colorTxt = document.getElementById('color');
 let copyBtn = document.getElementById('copy');
 
 function generateRandom(maxLimit){
 	let rand = Math.random() * maxLimit;
-	console.log(rand);
 	rand = Math.floor(rand);
 	return rand;
 }

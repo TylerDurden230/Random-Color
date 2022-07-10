@@ -15,10 +15,33 @@ div {
     margin: 1rem;
 }
 
+ul {
+    list-style-type: none;
+    list-style-image: none;
+}
+
+a {
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    transition: 300ms ease-in-out;
+}
+
+a:hover {
+    margin-left:20px
+}
+
 h1, h2, h3, h4 {
     text-align: center;
     margin: 1rem;
     color: #fff;
+}
+
+code {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #363636;
+    color: rgb(157, 224, 255);
 }
 
 button {
@@ -36,6 +59,12 @@ button {
 button:hover {
     background-color: #fff;
     color:black;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .container {
