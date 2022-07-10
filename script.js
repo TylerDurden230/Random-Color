@@ -25,6 +25,7 @@ function changeColor() {
 	copyBtn.style.display = 'block';
 }
 
+
 function copyText() {  
 	let copyTxt = document.getElementById('color').innerHTML;
 	navigator.clipboard.writeText(copyTxt);
