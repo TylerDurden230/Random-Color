@@ -1,6 +1,11 @@
 let body = document.getElementById('body');
 let colorTxt = document.getElementById('color');
 let copyBtn = document.getElementById('copy');
+let saveBtn = document.getElementById('save');
+let saved = document.getElementById('saved');
+
+let savedColors = [];
+let newColor = '';
 
 function generateRandom(maxLimit){
 	let rand = Math.random() * maxLimit;
@@ -19,12 +24,34 @@ function generateHexa(){
 
 function changeColor() {
 	copyBtn.innerHTML = 'Copy';
-	let newColor = generateHexa();
+	saveBtn.innerHTML = 'Save';
+	newColor = generateHexa();
 	body.style.backgroundColor = newColor;
 	colorTxt.innerHTML = newColor;
 	copyBtn.style.display = 'block';
 }
 
+function clear(elementToClear)
+{
+	elementToClear.innerHTML = '';
+}
+
+function saveColor() {
+	savedColors.push(newColor);
+	saveBtn.innerHTML = 'Saved!';
+	showColors();
+}
+
+function showColors() {
+	if (savedColors.length > 0) {
+		clear(saved);
+		for(let i = 0; i < savedColors.length; i++)
+		{
+			saved.innerHTML += `<h3>${savedColors[i]}</h3>`;
+		}
+	}
+	console.log(savedColors);
+}
 
 function copyText() {  
 	let copyTxt = document.getElementById('color').innerHTML;

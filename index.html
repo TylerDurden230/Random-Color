@@ -5,13 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Random Color</title>
+    <title>Random Colors</title>
 </head>
 <body id="body">
-    <div class="menu" id="menu">
-        <ul>
-            <li><a href="./gradient.html">Gradient</a></li>
-        </ul>
+    <div class="sidebar">
+        <div class="menu" id="menu">
+            <ul>
+                <li><a href="./gradient.html">Gradient</a></li>
+            </ul>
+        </div>
     </div>
     <div class="container">
         <h1>Random Color</h1>
@@ -19,7 +21,12 @@
         <div class="row center">
             <p id="color"></p>
             <button id="copy" onclick="copyText()">Copy</button>
+            <button id="save" onclick="saveColor()">Save</button>
         </div>
+    </div>
+
+    <div id="saved" class="saved">
+        
     </div>
 <script>
     window.onload = function() {

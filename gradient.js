@@ -22,9 +22,9 @@ function changeGradient(){
     copyBtn.innerHTML = 'Copy';
     let color1 = generateHexa();
     let color2 = generateHexa();
-    let style = `linear-gradient(to right, ${color1}, ${color2})`
+    let style = `linear-gradient(to right, ${color1}, ${color2})`;
     gradient.style.background = style;
-    code.innerHTML = style;
+    code.innerHTML = `background: ${style};`;
     copyBtn.style.display = 'block';
 }
 
