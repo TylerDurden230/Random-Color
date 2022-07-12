@@ -3,6 +3,7 @@ let colorTxt = document.getElementById('color');
 let copyBtn = document.getElementById('copy');
 let saveBtn = document.getElementById('save');
 let saved = document.getElementById('saved');
+let s = false;
 
 let savedColors = [];
 let newColor = '';
@@ -25,6 +26,7 @@ function generateHexa(){
 function changeColor() {
 	copyBtn.innerHTML = 'Copy';
 	saveBtn.innerHTML = 'Save';
+	s = false;
 	newColor = generateHexa();
 	body.style.backgroundColor = newColor;
 	colorTxt.innerHTML = newColor;
@@ -37,20 +39,34 @@ function clear(elementToClear)
 }
 
 function saveColor() {
-	savedColors.push(newColor);
-	saveBtn.innerHTML = 'Saved!';
-	showColors();
+	if (!s)
+		if(savedColors.length < 5) {
+			savedColors.push(newColor);
+			saveBtn.innerHTML = 'Saved!';
+			s = true;
+			showColors();
+		}
+		else 
+		{
+			savedColors.shift();
+			savedColors[4] = newColor;
+			s = true;
+			showColors();
+		}
+	else 
+		saveBtn.innerHTML = 'Already saved!';
+}
+
+function removeColor() {
+	console.log('boh');
 }
 
 function showColors() {
 	if (savedColors.length > 0) {
 		clear(saved);
 		for(let i = 0; i < savedColors.length; i++)
-		{
-			saved.innerHTML += `<h3>${savedColors[i]}</h3>`;
-		}
+			saved.innerHTML += `<button class="box" style="background-color: ${savedColors[i]};"><h6>${savedColors[i]}</h6></button>`;
 	}
-	console.log(savedColors);
 }
 
 function copyText() {  
