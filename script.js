@@ -4,6 +4,8 @@ let copyBtn = document.getElementById('copy');
 let saveBtn = document.getElementById('save');
 let saved = document.getElementById('saved');
 let capacity;
+let wWidth = window.innerWidth;
+const ratio = 200;
 let s = false;
 
 let savedColors = [];
@@ -15,18 +17,9 @@ function generateRandom(maxLimit){
 	return rand;
 }
 
-function calcCapacity() {
-	if (window.innerWidth < 600)
-		capacity = 2;
-	else if (window.innerWidth < 850)
-		capacity = 3;
-	else if (window.innerWidth < 1150)
-		capacity = 4;
-	else if (window.innerWidth < 1400)
-		capacity = 5;
-	else
-		capacity = 6;
-	console.log (window.innerWidth);
+function calcCapacity(){
+	capacity = Math.floor(wWidth / ratio);
+	console.log(wWidth);
 	console.log(capacity);
 }
 
