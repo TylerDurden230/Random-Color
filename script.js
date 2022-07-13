@@ -7,9 +7,10 @@ let capacity;
 let wWidth = window.innerWidth;
 const ratio = 200;
 let s = false;
-
 let savedColors = [];
 let newColor = '';
+
+let closeBtns;
 
 function generateRandom(maxLimit){
 	let rand = Math.random() * maxLimit;
@@ -66,16 +67,26 @@ function saveColor() {
 		saveBtn.innerHTML = 'Already saved!';
 }
 
-function removeColor() {
-	console.log('boh');
+function removeColor(id) {
+	const index = savedColors.indexOf(id);
+	if (index > -1)
+		savedColors.splice(index, 1); // 2nd parameter means remove one item only
+	showColors();
 }
 
 function showColors() {
-	if (savedColors.length > 0) {
 		clear(saved);
-		for(let i = 0; i < savedColors.length; i++)
-			saved.innerHTML += `<button class="box" style="background-color: ${savedColors[i]};"><div class="close">x</div><h6>${savedColors[i]}</h6></button>`;
+		for(let i = 0; i < savedColors.length; i++) {
+			saved.innerHTML += `<div id="${savedColors[i]}" class="box" style="background-color: ${savedColors[i]};">
+			<button onclick="copy('${savedColors[i]}')" class="copy">c</button>
+			<button onclick="removeColor('${savedColors[i]}')" class="close">x</button>
+			<h6>${savedColors[i]}</h6></div>`;
 	}
+}
+
+function copy(id) {
+	navigator.clipboard.writeText(id);
+	alert("Copied");
 }
 
 function copyText() {  
