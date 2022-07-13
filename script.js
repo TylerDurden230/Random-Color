@@ -81,7 +81,7 @@ function showColors() {
 	if (savedColors.length > 0) {
 		clear(saved);
 		for(let i = 0; i < savedColors.length; i++)
-			saved.innerHTML += `<button class="box" style="background-color: ${savedColors[i]};"><h6>${savedColors[i]}</h6></button>`;
+			saved.innerHTML += `<button class="box" style="background-color: ${savedColors[i]};"><div class="close">x</div><h6>${savedColors[i]}</h6></button>`;
 	}
 }
 
