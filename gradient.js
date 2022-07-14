@@ -1,4 +1,3 @@
-
 let gradient = document.getElementById('body');
 let copyBtn = document.getElementById('copy');
 let code = document.getElementById('code');

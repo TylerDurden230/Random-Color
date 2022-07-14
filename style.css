@@ -88,10 +88,10 @@ input[type="range"] {
     background: #fff;
     cursor: ew-resize;
     box-shadow: 0 0 2px 0 #555;
-    transition: background .3s ease-in-out;
+    transition: .3s ease-in-out;
   }
   
-  input[type=range]::-webkit-slider-runnable-track  {
+input[type=range]::-webkit-slider-runnable-track  {
     -webkit-appearance: none;
     box-shadow: none;
     border: none;
@@ -220,12 +220,23 @@ input[type="range"] {
     padding: 0;
 }
 
+.controls {
+    display: flex;
+
+}
+
 .copy:hover {
     background-color: #08A89E;
     color: #fff;
 }
 
-@media screen and (max-width: 600px) {
+/* MOBILE */
+
+@media screen and (max-width: 650px) {
+
+    h1, h2, h3, h4 {
+        font-size:large;
+    }
 
     .megacontainer {
         display: flex;
