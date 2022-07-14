@@ -5,7 +5,8 @@ I also improved knowledge about colors and how they work.
 
 ## Single Color
 
-In this page you can randomly change background color, copy it, save it for later and remove it.
+In this page you can randomly change background color, getting the corresponding hex code. 
+You can copy it, save it for later and remove it.
 
 ## Gradient
 
