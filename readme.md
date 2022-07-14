@@ -13,6 +13,6 @@ You can also save it for later and remove it to make space for other colors.
 In this page you can randomly get a 2 colors linear-gradient background.
 You can change degrees to have a different slope and eventually copy the generated css code.
 
-## New Feeatures
+## New Features
 
 I'm working on new features to add. :)
