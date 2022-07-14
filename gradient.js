@@ -13,7 +13,6 @@ document.getElementById("deg").oninput = function() {
 
 function setDegrees() {
 	let val = document.getElementById("deg").value
-	document.getElementById('degValue').innerHTML = val;
 	changeDegs(val);
  }
 
