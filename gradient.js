@@ -2,6 +2,20 @@
 let gradient = document.getElementById('body');
 let copyBtn = document.getElementById('copy');
 let code = document.getElementById('code');
+let degs = 0;
+let color1 = '';
+let color2 = '';
+let style = '';
+
+document.getElementById("deg").oninput = function() {
+	setDegrees();
+};
+
+function setDegrees() {
+	let val = document.getElementById("deg").value
+	document.getElementById('degValue').innerHTML = val;
+	changeDegs(val);
+ }
 
 function generateRandom(maxLimit){
 	let rand = Math.random() * maxLimit;
@@ -14,15 +28,22 @@ function generateHexa(){
 	let color = '#';
 	for(let i = 0; i < 6; i++)
 		color += arr[generateRandom(16)];
-	console.log(color);
 	return color;
+}
+
+function changeDegs(val) {
+	degs = val;
+	style = `linear-gradient(${degs}deg, ${color1}, ${color2})`;
+	gradient.style.background = style;
+    code.innerHTML = `background: ${style};`;
+    copyBtn.style.display = 'block';
 }
 
 function changeGradient(){
     copyBtn.innerHTML = 'Copy';
-    let color1 = generateHexa();
-    let color2 = generateHexa();
-    let style = `linear-gradient(to right, ${color1}, ${color2})`;
+    color1 = generateHexa();
+    color2 = generateHexa();
+    style = `linear-gradient(${degs}deg, ${color1}, ${color2})`;
     gradient.style.background = style;
     code.innerHTML = `background: ${style};`;
     copyBtn.style.display = 'block';
