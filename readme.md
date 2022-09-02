@@ -17,4 +17,4 @@ You can change degrees to have a different slope and eventually copy the generat
 
 I'm working on new features to add. :)
 
-[Live Preview](https://randomcolorz.netlify.app/))
+[Live Preview](https://randomcolorz.netlify.app/)
