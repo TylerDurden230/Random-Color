@@ -11,14 +11,29 @@ let savedColors = [];
 let newColor = "";
 let closeBtns;
 
+/* window.addEventListener("load", function () {
+  init();
+});
+ */
+
 window.addEventListener("resize", () => {
   wWidth = window.innerWidth;
   calcCapacity();
-  let savedContainerHeight = Math.ceil(savedColors.length / capacity) * 175;
+  let savedContainerHeight = Math.ceil(savedColors.length / capacity) * 100;
   saved.style.height = savedContainerHeight + "px";
   console.log("savedHeight",savedContainerHeight, "Capacity: ",capacity, savedColors.length, wWidth);
   showColors();
 });
+
+function showLoadingSpinner() {
+  const spinnerElement = document.getElementById("loadingSpinner");
+  spinnerElement.style.display = "block";
+}
+
+function hideLoadingSpinner() {
+  const spinnerElement = document.getElementById("loadingSpinner");
+  spinnerElement.style.display = "none";
+}
 
 function init() {
   newColor = generateHexa()
@@ -27,6 +42,8 @@ function init() {
     savedColors = JSON.parse(localStorage.getItem("savedColors"));
   calcCapacity();
   showColors();
+  hideLoadingSpinner();
+  document.getElementById("megacontainer").style.display = "block";
 }
 
 function generateRandom(maxLimit) {
