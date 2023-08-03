@@ -43,7 +43,7 @@ function init() {
   calcCapacity();
   showColors();
   hideLoadingSpinner();
-  document.getElementById("megacontainer").style.display = "block";
+  document.getElementById("megacontainer").style.display = "flex";
 }
 
 function generateRandom(maxLimit) {
