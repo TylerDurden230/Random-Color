@@ -21,6 +21,8 @@ window.addEventListener("resize", () => {
 });
 
 function init() {
+  newColor = generateHexa()
+  setNewColor();
   if (localStorage.getItem("savedColors") != null)
     savedColors = JSON.parse(localStorage.getItem("savedColors"));
   calcCapacity();
@@ -31,12 +33,6 @@ function generateRandom(maxLimit) {
   let rand = Math.random() * maxLimit;
   rand = Math.floor(rand);
   return rand;
-}
-
-function calcCapacity() {
-  capacity = Math.floor(wWidth / ratio);
-  console.log(wWidth);
-  console.log(capacity);
 }
 
 function generateHexa() {
@@ -64,14 +60,24 @@ function generateHexa() {
   return color;
 }
 
+function setNewColor() {
+  body.style.backgroundColor = newColor;
+  colorTxt.innerHTML = newColor;
+  copyBtn.style.display = "block";
+}
+
+function calcCapacity() {
+  capacity = Math.floor(wWidth / ratio);
+  console.log(wWidth);
+  console.log(capacity);
+}
+
 function changeColor() {
   copyBtn.innerHTML = "Copy";
   saveBtn.innerHTML = "Save";
   s = false;
   newColor = generateHexa();
-  body.style.backgroundColor = newColor;
-  colorTxt.innerHTML = newColor;
-  copyBtn.style.display = "block";
+  setNewColor();
 }
 
 function clear(elementToClear) {
