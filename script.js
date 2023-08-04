@@ -11,17 +11,16 @@ let savedColors = [];
 let newColor = "";
 let closeBtns;
 
-/* window.addEventListener("load", function () {
+window.onload = function () {
   init();
-});
- */
+};
 
 window.addEventListener("resize", () => {
   wWidth = window.innerWidth;
   calcCapacity();
-  let savedContainerHeight = Math.ceil(savedColors.length / capacity) * 100;
+  let savedContainerHeight = Math.ceil(savedColors.length / capacity) * 125;
   saved.style.height = savedContainerHeight + "px";
-  console.log("savedHeight",savedContainerHeight, "Capacity: ",capacity, savedColors.length, wWidth);
+  //console.log("savedHeight",savedContainerHeight, "Capacity: ",capacity, savedColors.length, wWidth);
   showColors();
 });
 
@@ -73,7 +72,6 @@ function generateHexa() {
   ];
   let color = "#";
   for (let i = 0; i < 6; i++) color += arr[generateRandom(16)];
-  console.log(color);
   return color;
 }
 
@@ -85,8 +83,6 @@ function setNewColor() {
 
 function calcCapacity() {
   capacity = Math.floor(wWidth / ratio);
-  console.log(wWidth);
-  console.log(capacity);
 }
 
 function changeColor() {
@@ -135,13 +131,6 @@ function showColors() {
   }
 }
 
-// resize saved container height based on window width and capacit. this should listen to the event window.onresize
-function resizeSavedContainer() {
-
-}
-
-
-
 function copy(id) {
   navigator.clipboard.writeText(id);
   alert("Copied");
@@ -152,3 +141,5 @@ function copyText() {
   navigator.clipboard.writeText(copyTxt);
   copyBtn.innerHTML = "Copied!";
 }
+
+export { generateHexa, generateRandom, calcCapacity, showColors, removeColor, copy, copyText, saveColor, clear, changeColor, setNewColor, showLoadingSpinner, hideLoadingSpinner };
