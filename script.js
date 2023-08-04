@@ -43,6 +43,8 @@ document.getElementById("randomize").addEventListener("click", function () {
   changeColor();
 });
 
+
+
 function hideLoadingSpinner() {
   const spinnerElement = document.getElementById("loadingSpinner");
   spinnerElement.style.display = "none";
@@ -140,10 +142,34 @@ function removeColor(id) {
 function showColors() {
   clear(saved);
   for (let i = 0; i < savedColors.length; i++) {
-    saved.innerHTML += `<div id="${savedColors[i]}" class="box" style="background-color: ${savedColors[i]};">
-			<button onclick="copy('${savedColors[i]}')" class="copy">c</button>
-			<button onclick="removeColor('${savedColors[i]}')" class="close">x</button>
-			<h6>${savedColors[i]}</h6></div>`;
+    const colorDiv = document.createElement("div");
+    colorDiv.id = savedColors[i];
+    colorDiv.classList.add("box");
+    colorDiv.style.backgroundColor = savedColors[i];
+
+    const copyBtn = document.createElement("button");
+    copyBtn.classList.add("copy");
+    copyBtn.innerText = "c";
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(savedColors[i]);
+      alert("Copied");
+    });
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("close");
+    removeBtn.innerText = "x";
+    removeBtn.addEventListener("click", () => {
+      removeColor(savedColors[i]);
+    });
+
+    const colorName = document.createElement("h6");
+    colorName.innerText = savedColors[i];
+
+    colorDiv.appendChild(copyBtn);
+    colorDiv.appendChild(removeBtn);
+    colorDiv.appendChild(colorName);
+
+    saved.appendChild(colorDiv);
   }
 }
 
