@@ -3,7 +3,8 @@ let colorTxt = document.getElementById("color");
 let copyBtn = document.getElementById("copy");
 let saveBtn = document.getElementById("save");
 let saved = document.getElementById("saved");
-let capacity;
+const MIN_CAPACITY = 3;
+let capacity
 let wWidth = window.innerWidth;
 const ratio = 200;
 let s = false;
@@ -18,16 +19,29 @@ window.onload = function () {
 window.addEventListener("resize", () => {
   wWidth = window.innerWidth;
   calcCapacity();
-  let savedContainerHeight = Math.ceil(savedColors.length / capacity) * 125;
+  let savedContainerHeight =
+    Math.ceil(savedColors.length / capacity) * 125 < 1
+      ? 125
+      : Math.ceil(savedColors.length / capacity) * 125;
   saved.style.height = savedContainerHeight + "px";
   //console.log("savedHeight",savedContainerHeight, "Capacity: ",capacity, savedColors.length, wWidth);
   showColors();
 });
 
-function showLoadingSpinner() {
-  const spinnerElement = document.getElementById("loadingSpinner");
-  spinnerElement.style.display = "block";
-}
+document.getElementById("saved").addEventListener("click", function (event) {
+  if (event.target.classList.contains("close")) {
+    const colorId = event.target.parentNode.id;
+    removeColor(colorId);
+  }
+});
+
+document.getElementById("save").addEventListener("click", function () {
+  saveColor();
+});
+
+document.getElementById("randomize").addEventListener("click", function () {
+  changeColor();
+});
 
 function hideLoadingSpinner() {
   const spinnerElement = document.getElementById("loadingSpinner");
@@ -35,7 +49,7 @@ function hideLoadingSpinner() {
 }
 
 function init() {
-  newColor = generateHexa()
+  newColor = generateHexa();
   setNewColor();
   if (localStorage.getItem("savedColors") != null)
     savedColors = JSON.parse(localStorage.getItem("savedColors"));
@@ -76,13 +90,15 @@ function generateHexa() {
 }
 
 function setNewColor() {
-  body.style.backgroundColor = newColor;
-  colorTxt.innerHTML = newColor;
-  copyBtn.style.display = "block";
+  if (newColor) {
+    body.style.backgroundColor = newColor;
+    if (colorTxt != null) colorTxt.innerHTML = newColor;
+    copyBtn.style.display = "block";
+  }
 }
 
 function calcCapacity() {
-  capacity = Math.floor(wWidth / ratio);
+  capacity = Math.floor(wWidth / ratio) < MIN_CAPACITY ? MIN_CAPACITY : Math.floor(wWidth / ratio);
 }
 
 function changeColor() {
@@ -142,4 +158,4 @@ function copyText() {
   copyBtn.innerHTML = "Copied!";
 }
 
-export { generateHexa, generateRandom, calcCapacity, showColors, removeColor, copy, copyText, saveColor, clear, changeColor, setNewColor, showLoadingSpinner, hideLoadingSpinner };
+export { generateHexa };

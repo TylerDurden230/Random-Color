@@ -1,4 +1,4 @@
-import { generateHexa, hideLoadingSpinner, showLoadingSpinner } from "./script.js";
+import { generateHexa } from "./script.js";
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -17,6 +17,10 @@ window.onload = function () {
 document.getElementById("deg").oninput = function () {
   setDegrees();
 };
+
+document.getElementById("randomize").addEventListener("click", function () {
+	changeGradient();
+  });
 
 function setDegrees() {
   let val = document.getElementById("deg").value;
