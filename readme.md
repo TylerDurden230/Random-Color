@@ -10,7 +10,7 @@ Moreover, I explored the usage of Local Storage, a client-side web storage featu
 
 To enhance my grasp of JavaScript, I dived into using various Math functions, understanding their purpose, and applying them appropriately in my code.
 
-Furthermore, I deepened my knowledge of colors and their representation using hexadecimal codes. By working with colors in my project, I gained practical insights into color theory and color handling in web design.
+Furthermore, I deepened my knowledge of colors and their representation using hexadecimal codes.
 
 Overall, this project provided me with valuable hands-on experience, and I am now equipped with essential skills in front-end development, enabling me to create more interactive and responsive web applications.
 
