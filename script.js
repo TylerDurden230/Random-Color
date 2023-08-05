@@ -17,6 +17,7 @@ window.onload = function () {
 window.addEventListener("resize", () => {
   wWidth = window.innerWidth;
   calcCapacity();
+  console.log("capacity: " + capacity);
   let savedContainerHeight =
     Math.ceil(savedColors.length / capacity) * 125 < 1
       ? 125
@@ -111,6 +112,7 @@ function changeColor() {
 }
 
 function clear(elementToClear) {
+  if (elementToClear != null)
   elementToClear.innerHTML = "";
 }
 
