@@ -3,11 +3,10 @@ let colorTxt = document.getElementById("color");
 let copyBtn = document.getElementById("copy");
 let saveBtn = document.getElementById("save");
 let saved = document.getElementById("saved");
-const MIN_CAPACITY = 3;
-let capacity
+export const MIN_CAPACITY = 3;
+let capacity;
 let wWidth = window.innerWidth;
 const ratio = 200;
-let s = false;
 let savedColors = [];
 let newColor = "";
 
@@ -23,16 +22,17 @@ window.addEventListener("resize", () => {
       ? 125
       : Math.ceil(savedColors.length / capacity) * 125;
   saved.style.height = savedContainerHeight + "px";
-  //console.log("savedHeight",savedContainerHeight, "Capacity: ",capacity, savedColors.length, wWidth);
   showColors();
 });
 
-document.getElementById("saved").addEventListener("click", function (event) {
-  if (event.target.classList.contains("close")) {
-    const colorId = event.target.parentNode.id;
-    removeColor(colorId);
-  }
-});
+if (document.getElementById("saved") != null) {
+  document.getElementById("saved").addEventListener("click", function (event) {
+    if (event.target.classList.contains("close")) {
+      const colorId = event.target.parentNode.id;
+      removeColor(colorId);
+    }
+  });
+}
 
 document.getElementById("save").addEventListener("click", function () {
   saveColor();
@@ -41,8 +41,6 @@ document.getElementById("save").addEventListener("click", function () {
 document.getElementById("randomize").addEventListener("click", function () {
   changeColor();
 });
-
-
 
 function hideLoadingSpinner() {
   const spinnerElement = document.getElementById("loadingSpinner");
@@ -98,14 +96,16 @@ function setNewColor() {
   }
 }
 
-function calcCapacity() {
-  capacity = Math.floor(wWidth / ratio) < MIN_CAPACITY ? MIN_CAPACITY : Math.floor(wWidth / ratio);
+export function calcCapacity() {
+  capacity =
+    Math.floor(wWidth / ratio) < MIN_CAPACITY
+      ? MIN_CAPACITY
+      : Math.floor(wWidth / ratio);
 }
 
 function changeColor() {
   copyBtn.innerHTML = "Copy";
   saveBtn.innerHTML = "Save";
-  s = false;
   newColor = generateHexa();
   setNewColor();
 }
@@ -114,22 +114,18 @@ function clear(elementToClear) {
   elementToClear.innerHTML = "";
 }
 
+
+// save color and check if it's already saved
 function saveColor() {
-  if (!s)
-    if (savedColors.length < capacity) {
-      savedColors.push(newColor);
-      saveBtn.innerHTML = "Saved!";
-      s = true;
-      showColors();
-    } else {
-      savedColors.shift();
-      savedColors[capacity - 1] = newColor;
-      s = true;
-      showColors();
-    }
-  else saveBtn.innerHTML = "Already saved!";
-  localStorage.setItem("savedColors", JSON.stringify(savedColors));
+  if (savedColors.includes(newColor)) {
+    alert("Color already saved");
+  } else {
+    savedColors.push(newColor);
+    showColors();
+    localStorage.setItem("savedColors", JSON.stringify(savedColors));
+  }
 }
+
 
 function removeColor(id) {
   const index = savedColors.indexOf(id);

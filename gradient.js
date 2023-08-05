@@ -1,20 +1,34 @@
-import { generateHexa } from "./script.js";
+import { generateHexa, calcCapacity } from "./script.js";
 
 let gradient = document.getElementById("body");
 let copyBtn = document.getElementById("copy");
 let code = document.getElementById("code");
-let saved = document.getElementById("saved");
+let savedDiv = document.getElementById("savedGradients");
 let savedGradients = [];
 let newGradient = "";
 
 let degs = 0;
 let color1 = "";
 let color2 = "";
-let style = "";
 
 window.onload = function () {
+  console.log("loaded");
 	changeGradient();
-  };
+  if (localStorage.getItem("savedGradients") != null)
+    savedGradients = JSON.parse(localStorage.getItem("savedGradients"));
+  showGradients();
+};
+
+window.addEventListener("resize", () => {
+  wWidth = window.innerWidth;
+  calcCapacity();
+  let savedContainerHeight =
+    Math.ceil(savedGradients.length / capacity) * 125 < 1
+      ? 125
+      : Math.ceil(savedGradients.length / capacity) * 125;
+  savedDiv.style.height = savedContainerHeight + "px";
+  showGradients();
+});
 	
 document.getElementById("deg").oninput = function () {
   setDegrees();
@@ -35,16 +49,16 @@ function setDegrees() {
 
 function changeDegs(val) {
   degs = val;
-  style = `linear-gradient(${degs}deg, ${color1}, ${color2})`;
-  gradient.style.background = style;
-  code.innerHTML = `background: ${style};`;
+  newGradient = `linear-gradient(${degs}deg, ${color1}, ${color2})`;
+  gradient.style.background = newGradient;
+  code.innerHTML = `background: ${newGradient};`;
   copyBtn.style.display = "block";
 }
 
 function setNewGradient() {
-  if (style) {
-    gradient.style.background = style;
-    code.innerHTML = `background: ${style};`;
+  if (newGradient) {
+    gradient.style.background = newGradient;
+    code.innerHTML = `background: ${newGradient};`;
     copyBtn.style.display = "block";
   }
 }
@@ -53,20 +67,23 @@ function changeGradient() {
   copyBtn.innerHTML = "Copy";
   color1 = generateHexa();
   color2 = generateHexa();
-  style = `linear-gradient(${degs}deg, ${color1}, ${color2})`;
-  gradient.style.background = style;
-  code.innerHTML = `background: ${style};`;
+  newGradient = `linear-gradient(${degs}deg, ${color1}, ${color2})`;
+  gradient.style.background = newGradient;
+  code.innerHTML = `background: ${newGradient};`;
   copyBtn.style.display = "block";
   setNewGradient();
 }
 
 function saveGradient() {
-  if (style) {
-    savedGradients.push(style);
+  if (savedGradients.includes(newGradient)) {
+    alert("Gradient already saved");
+  } else {
+    savedGradients.push(newGradient);
     showGradients();
     localStorage.setItem("savedGradients", JSON.stringify(savedGradients));
   }
 }
+
 
 function removeGradient(id) {
   const index = savedGradients.indexOf(id);
@@ -87,7 +104,7 @@ function copyText() {
 }
 
 function showGradients(){
-  clear(saved);
+  clear(savedDiv);
   for (let i = 0; i < savedGradients.length; i++) {
     const gradientDiv = document.createElement("div");
     gradientDiv.id = savedGradients[i];
@@ -110,7 +127,7 @@ function showGradients(){
     });
     gradientDiv.appendChild(copyBtn);
     gradientDiv.appendChild(removeBtn);
-    saved.appendChild(gradientDiv);
+    savedDiv.appendChild(gradientDiv);
   }
 }
 
