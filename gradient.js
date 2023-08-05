@@ -1,4 +1,4 @@
-import { generateHexa, calcCapacity } from "./script.js";
+import { generateHexa, calcCapacity, MIN_CAPACITY, MAX_CAPACITY } from "./script.js";
 
 let gradient = document.getElementById("body");
 let copyBtn = document.getElementById("copy");
@@ -6,6 +6,10 @@ let code = document.getElementById("code");
 let savedDiv = document.getElementById("savedGradients");
 let savedGradients = [];
 let newGradient = "";
+let wWidth = window.innerWidth;
+let capacity;
+const ratio = 200;
+
 
 let degs = 0;
 let color1 = "";
@@ -75,12 +79,15 @@ function changeGradient() {
 }
 
 function saveGradient() {
-  if (savedGradients.includes(newGradient)) {
-    alert("Gradient already saved");
-  } else {
+  if (savedGradients.length >= 10) {
+    savedGradients.shift();
+  }
+  if (savedGradients.indexOf(newGradient) == -1) {
     savedGradients.push(newGradient);
     showGradients();
     localStorage.setItem("savedGradients", JSON.stringify(savedGradients));
+  } else {
+    alert("Color already saved");
   }
 }
 

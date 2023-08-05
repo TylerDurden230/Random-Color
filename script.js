@@ -4,6 +4,7 @@ let copyBtn = document.getElementById("copy");
 let saveBtn = document.getElementById("save");
 let saved = document.getElementById("saved");
 export const MIN_CAPACITY = 3;
+export const MAX_CAPACITY = 10;
 let capacity;
 let wWidth = window.innerWidth;
 const ratio = 200;
@@ -22,7 +23,8 @@ window.addEventListener("resize", () => {
     Math.ceil(savedColors.length / capacity) * 125 < 1
       ? 125
       : Math.ceil(savedColors.length / capacity) * 125;
-  saved.style.height = savedContainerHeight + "px";
+      if (saved != null)
+      saved.style.height = savedContainerHeight + "px";
   showColors();
 });
 
@@ -98,10 +100,9 @@ function setNewColor() {
 }
 
 export function calcCapacity() {
-  capacity =
-    Math.floor(wWidth / ratio) < MIN_CAPACITY
-      ? MIN_CAPACITY
-      : Math.floor(wWidth / ratio);
+  capacity = Math.floor(wWidth / ratio);
+  if (capacity < MIN_CAPACITY) capacity = MIN_CAPACITY;
+  if (capacity > MAX_CAPACITY) capacity = MAX_CAPACITY;
 }
 
 function changeColor() {
@@ -116,18 +117,18 @@ function clear(elementToClear) {
   elementToClear.innerHTML = "";
 }
 
-
-// save color and check if it's already saved
 function saveColor() {
-  if (savedColors.includes(newColor)) {
-    alert("Color already saved");
-  } else {
+  if (savedColors.length >= 10) {
+    savedColors.shift();
+  }
+  if (savedColors.indexOf(newColor) == -1) {
     savedColors.push(newColor);
     showColors();
     localStorage.setItem("savedColors", JSON.stringify(savedColors));
+  } else {
+    alert("Color already saved");
   }
 }
-
 
 function removeColor(id) {
   const index = savedColors.indexOf(id);
@@ -165,7 +166,7 @@ function showColors() {
     colorDiv.appendChild(copyBtn);
     colorDiv.appendChild(removeBtn);
     colorDiv.appendChild(colorName);
-
+    if (saved != null)
     saved.appendChild(colorDiv);
   }
 }
