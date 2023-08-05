@@ -10,7 +10,6 @@ const ratio = 200;
 let s = false;
 let savedColors = [];
 let newColor = "";
-let closeBtns;
 
 window.onload = function () {
   init();
