@@ -37,6 +37,7 @@ if (document.getElementById("saved") != null) {
   });
 }
 
+if (document.getElementById("save") != null)
 document.getElementById("save").addEventListener("click", function () {
   saveColor();
 });

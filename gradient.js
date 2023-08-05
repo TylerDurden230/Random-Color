@@ -2,6 +2,7 @@ import { generateHexa, calcCapacity, MIN_CAPACITY, MAX_CAPACITY } from "./script
 
 let gradient = document.getElementById("body");
 let copyBtn = document.getElementById("copy");
+let saveBtn = document.getElementById("saveGradient");
 let code = document.getElementById("code");
 let savedDiv = document.getElementById("savedGradients");
 let savedGradients = [];
@@ -42,7 +43,7 @@ document.getElementById("randomize").addEventListener("click", function () {
 	changeGradient();
   });
 
-document.getElementById("save").addEventListener("click", function () {
+document.getElementById("saveGradient").addEventListener("click", function () {
   saveGradient();
 });
 
